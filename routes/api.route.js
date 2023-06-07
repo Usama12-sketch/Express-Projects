@@ -24,6 +24,13 @@ router.get('/users', async (req, res, next) => {
 res.json(user)
       
 });
+router.post('/user', async (req, res, next) => {
+  const{name, email, password } = req.body
+      const user = await  prisma.user.findMany()
+
+res.json(user)
+      
+});
 router.post('/messages', async (req, res, next) => {
 const id =   req.params.id
 // const [sessionUserId, receiverId] = id.split(",")
