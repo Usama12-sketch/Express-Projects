@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors({
-  origin: ["*", process.env.URL , "https://node-js-usama-project.onrender.com"]
+  origin: ["*", process.env.URL ,"https://chat-socket13-0-ip6j.vercel.app/", "https://node-js-usama-project.onrender.com"]
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
