@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors({
-  origin: ['http://localhost:3000',"chat-socket13-0-d1xp5x7gs-chodarykhan115-gmailcom.vercel.app", `${process.env.URL}`, "https://chat-socket13-0.vercel.app" ,"https://chat-socket13-0-ip6j.vercel.app/", "https://chat-socket13-0.vercel.app/"]
+  origin: ['http://localhost:3000', "http://localhost:3002","chat-socket13-0-d1xp5x7gs-chodarykhan115-gmailcom.vercel.app", `${process.env.URL}`, "https://chat-socket13-0.vercel.app" ,"https://chat-socket13-0-ip6j.vercel.app/", "https://chat-socket13-0.vercel.app/"]
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
