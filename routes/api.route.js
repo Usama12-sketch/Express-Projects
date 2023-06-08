@@ -24,6 +24,76 @@ router.get('/users', async (req, res, next) => {
 res.json(user)
       
 });
+router.post('/message', async (req, res, next) => {
+  // const io = req.io;
+      const message = req.body.message;
+      // const socket = req.body.socket;
+      io.emit('chat message', message);
+      console.log('Sent message:', message);
+      res.json({ message: 'Message sent successfully' });
+res.json(user)
+      
+});
+router.post('/loadMsg', async (req, res, next) => {
+  const io = req.io;
+      const message = req.body
+      // const socket = req.body.socket;
+
+      io.emit('loadMsg', message);
+      console.log('Sent message:', message);
+      res.json({ message: 'Message sent successfully' });      
+});
+router.post('/chat', async (req, res, next) => {
+  const io = req.io;
+
+      const msg = await req.body;
+  const message = await prisma.message.findUnique({
+    where:{
+      id: msg.data.id
+    },
+    include:{
+      sender:true
+    }
+
+
+  }) 
+        
+      // return message
+    
+      io.emit('message', message);
+
+      res.json({ message: 'Message sent successfully' });
+
+      
+});
+router.delete('/chat/:id', async (req, res, next) => {
+  const io = req.io;
+
+    // get message
+    const messageId = req.params.id;
+
+    // dispatch to channel "message"
+    const message = await prisma.message.delete({
+      where: {
+        id: req.params.id
+      
+  
+      },
+    });
+
+
+    io.emit("deleteMsg", messageId);
+
+      res.json({ message: 'Message delete successfully' });
+
+      
+});
+
+
+
+
+
+
 router.post('/user', async (req, res, next) => {
   const{name, email, password } = req.body
       const user = await  prisma.user.findMany()
